@@ -44,7 +44,6 @@ func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
 		app.clientError(w, http.StatusMethodNotAllowed)
 		return
 	}
-	fmt.Println("HIHIHIHIHIHI")
 	snippet := models.Snippet{
 		Title:   "Dummy Title",
 		Content: "Dummy Content",

@@ -1,10 +1,10 @@
 package mysql
 
-import "database/sql"
+import (
+	"database/sql"
 
-import "github.com/calbim/snippetbox/pkg/models"
-
-import "fmt"
+	"github.com/calbim/snippetbox/pkg/models"
+)
 
 //SnippetModel type wraps a sql database connection pool
 type SnippetModel struct {
@@ -19,7 +19,6 @@ func (m *SnippetModel) Insert(title, content, expires string) (int, error) {
 		return 0, err
 	}
 	id, err := result.LastInsertId()
-	fmt.Println(id)
 	if err != nil {
 		return 0, err
 	}
