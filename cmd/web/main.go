@@ -7,12 +7,14 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/calbim/snippetbox/pkg/models/mysql"
 	_ "github.com/go-sql-driver/mysql"
 )
 
 type application struct {
 	errorLog *log.Logger
 	infoLog  *log.Logger
+	snippets *mysql.SnippetModel
 }
 
 func main() {
@@ -33,7 +35,7 @@ func main() {
 
 	defer db.Close()
 
-	app := &application{errorLog: errorLog, infoLog: infoLog}
+	app := &application{errorLog: errorLog, infoLog: infoLog, snippets: &mysql.SnippetModel{DB: db}}
 
 	srv := http.Server{
 		Addr:     *addr,

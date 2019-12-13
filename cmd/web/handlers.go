@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/calbim/snippetbox/pkg/models"
 	"net/http"
 	"strconv"
 	"text/template"
+	"time"
 )
 
 func (app *application) home(w http.ResponseWriter, r *http.Request) {
@@ -42,5 +44,12 @@ func (app *application) createSnippet(w http.ResponseWriter, r *http.Request) {
 		app.clientError(w, http.StatusMethodNotAllowed)
 		return
 	}
+	fmt.Println("HIHIHIHIHIHI")
+	snippet := models.Snippet{
+		Title:   "Dummy Title",
+		Content: "Dummy Content",
+		Expires: time.Now().Add(1),
+	}
+	app.snippets.Insert(snippet.Title, snippet.Content, snippet.Expires.String())
 	w.Write([]byte("Create a new snippet"))
 }
